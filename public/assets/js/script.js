@@ -134,7 +134,7 @@ class Game {
   }
 
   fetchUpdateScore(){
-    fetch('http://localhost:3000/api/user/1/score', {
+    fetch('http://localhost:3000/api/score', {
       method: 'put', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',

@@ -48,7 +48,7 @@ class Game {
     if (playerChoice === "rock" && comChoice === "paper") {
       return this.resultPlayerLose();
     }
-    
+
 
     if (playerChoice === "rock" && comChoice === "scissor") {
       return this.resultPlayerWin();
@@ -71,7 +71,7 @@ class Game {
     }
   }
 
-  setBackground(playerType, choice){
+  setBackground(playerType, choice) {
     // Ambil element berdasar id, kemudian berikan kelas custom-selected
     // Cara di bawah bisa dilakukan karena penamaan id menggunakan format jenisplayer-pilihan
     const selectedElement = document.getElementById(`${playerType}-${choice}`);
@@ -92,7 +92,7 @@ class Game {
     // hapus style background pada tulisan VS
     document.getElementById("vs").classList.remove("custom-green-vs-box");
     document.getElementById("vs").classList.remove("custom-green-darker-vs-box");
-    
+
     // atur kembali tulisan menjadi VS & kembalikan style asal
     document.getElementById("vs").innerHTML = "VS";
     document.getElementById("vs").classList.add("custom-vs-text");
@@ -101,11 +101,11 @@ class Game {
   resultDraw() {
     // Cetak tulisan ke console
     console.log("DRAW");
-    
+
     // Ambil element & ubah tulisannya
     const vsElement = document.getElementById("vs");
     vsElement.innerHTML = "DRAW";
-    
+
     // Hapus kelas custom-vs-text & tambahkan kelas custom-green-darker-vs-box
     // Cek kelas custom-vs-text & custom-green-darker-vs-box di style.css
     vsElement.classList.remove("custom-vs-text");
@@ -113,11 +113,11 @@ class Game {
   }
 
   resultPlayerLose() {
-    
+
     // Cetak tulisan ke console
     console.log("COM WIN");
 
-    
+
     // Ambil element & ubah tulisannya
     const vsElement = document.getElementById("vs");
     vsElement.innerHTML = "COM WIN";
@@ -133,8 +133,31 @@ class Game {
     vsElement.classList.add("custom-green-vs-box");
   }
 
+  fetchUpdateScore(){
+    fetch('http://localhost:3000/api/score', {
+      method: 'put', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJkYWRhbmcxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWRhbmcxMjMiLCJpYXQiOjE2MzcxMjI4NDB9.2vk1a_kMlmuklPDigMDmMTlOqGpMDKuJoSuc-Y5hJCQ'
+      },
+      body: JSON.stringify({
+        gameId:'1',
+        score:'1'
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
   resultPlayerWin() {
     // Cetak tulisan ke console
+    this.fetchUpdateScore();
+    
     console.log("PLAYER WIN");
 
     // Ambil element & ubah tulisannya
@@ -152,7 +175,7 @@ class Game {
     const userScore = document.getElementById("user-score");
     userScore.innerHTML = this.user_score;
 
-    console.log("user score: " + user_score)
+    console.log("user score: " + this.user_score)
 
     // Hapus kelas custom-vs-text & tambahkan kelas custom-green-vs-box
     // Cek kelas custom-vs-text & custom-green-vs-box di style.css

@@ -1,14 +1,24 @@
-import './App.css';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Game from './pages/Game'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
-  
-  return (
-    <Router>
-      <Route path="/game" component={Game} />
-    </Router>
-  );
+import Game from './pages/Game';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+class App extends Component {
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path="/game" component={Game} />
+                    <Route exact path="/profile/:username" component={Profile} />
+                    <Route exact path="/login" component={Login}/>
+                    <Route exact path="/register" component={Register}/>
+                </Switch>
+            </Router>
+        );
+    }
 }
 
-export default App;
+export default App

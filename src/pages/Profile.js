@@ -6,7 +6,8 @@ import '../styles/Profile.css'
 
 function Profile () {
     const { username } = useParams()
-    const url = `http://localhost:3000/api/user/${username}`
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const url = `${apiUrl}/user/${username}`
     const [user, setUser] = useState(null)
 
     let content = null

@@ -15,8 +15,8 @@ export default class Register extends Component {
             username: this.username,
             password: this.password
         }
-        
-        axios.post('http://localhost:3000/api/register', data)
+        const apiUrl = process.env.REACT_APP_API_BASE_URL;
+        axios.post(`${apiUrl}/register`, data)
             .then(res => {
                 console.log(res)
             })

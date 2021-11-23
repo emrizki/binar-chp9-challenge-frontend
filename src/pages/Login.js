@@ -12,8 +12,8 @@ export default class Login extends Component {
             username: this.username,
             password: this.password
         }
-
-        axios.post('http://localhost:3000/api/login', data)
+        const apiUrl = process.env.REACT_APP_API_BASE_URL;
+        axios.post(`${apiUrl}/login`, data)
             .then(res => {
                 console.log(res)
             })

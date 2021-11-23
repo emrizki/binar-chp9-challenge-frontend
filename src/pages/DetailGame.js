@@ -14,11 +14,12 @@ class Detail extends Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3000/api/game/${id}`)
+        const apiUrl = process.env.REACT_APP_API_BASE_URL;
+        fetch(`${apiUrl}/game/${id}`)
             .then(response => response.json())
             .then(result => {
                 this.setState({ game: result.data })
-                fetch(`http://localhost:3000/api/game/${id}/leaderboard`)
+                fetch(`${apiUrl}/game/${id}/leaderboard`)
                     .then(response => response.json())
                     .then(result => {
                         this.setState({ leaderboard: result.data })
@@ -54,7 +55,7 @@ class Detail extends Component {
                             <div class="col-11 d-flex flex-column justify-content-center">
                                 <h1 class="text-center text-uppercase mt-5" style={{ color: "white" }}> SELAMAT DATANG DI GAME <br></br><p style={{ fontSize: "70px" }}>{game.name}</p> </h1>
 
-                                <a href="/" class="btn  mt-5"
+                                <a href="/game" class="btn  mt-5"
                                     style={{ color: "white", backgroundColor: "#0a1f30", marginLeft: "auto", marginRight: "auto" }}>MAIN
                                     SEKARANG</a>
                             </div>

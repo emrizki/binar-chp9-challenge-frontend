@@ -14,7 +14,7 @@ function Profile() {
                             <h1 class="text-center text-uppercase" style={{ color: "white" }}>WEBSITE UNTUK MAIN GAME TERKEREN DI
                                 DUNIA</h1>
 
-                            <a href="/" class="btn  mt-5"
+                            <a href="/game" class="btn  mt-5"
                                 style={{ color: "white", backgroundColor: "#0a1f30", marginLeft: "auto", marginRight: "auto" }}>MAIN
                                 SEKARANG</a>
                         </div>
@@ -35,7 +35,7 @@ function Profile() {
                         <div class="col-md-6 d-flex flex-column justify-content-center">
                             <h1 class=" text-uppercase" style={{ color: "white" }}>PILIH RIBUAN GAMES KEREN YANG BISA KAMU MAINKAN SEKARANG</h1>
 
-                            <a href="/game" class="btn  mt-5" style={{ color: "white", backgroundColor: "#0a1f30", width: "200px" }}>PILIH GAME</a>
+                            <a href="/listgame" class="btn  mt-5" style={{ color: "white", backgroundColor: "#0a1f30", width: "200px" }}>PILIH GAME</a>
                         </div>
                         <div class="col-md-6">
                             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">

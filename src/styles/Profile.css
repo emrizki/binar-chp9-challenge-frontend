@@ -14,7 +14,7 @@
     height: 100vh;
 }
 
-img {
+.img {
     border-radius: 50%;
     border: 5px solid lightgray;
     background-color: lightgray;

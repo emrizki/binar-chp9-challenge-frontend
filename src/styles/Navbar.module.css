@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Road+Rage&display=swap');
+
+.navbar {
+    background: rgb(20, 20, 20);
+}
+
+.navbrand {
+    color: white;
+    font-family: 'Road Rage', cursive;
+    font-size: 35px;
+}
+
+.navbrand:hover {
+    color: white;
+}
+
+.navlink {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+}
+
+.navlink:hover {
+    color: lightgray;
+}

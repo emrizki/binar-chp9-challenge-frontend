@@ -71,7 +71,7 @@ function Profile () {
                     <div className="text-center">
                         <br/>
                         <br/>
-                        <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/cross-sign-3701844-3084632.png" width="150" height="150"/>
+                        <img className="img" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/cross-sign-3701844-3084632.png" width="150" height="150"/>
                         <br/>
                         <br/>
                         <h1><strong>{username}</strong> does not exist</h1>

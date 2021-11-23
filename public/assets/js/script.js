@@ -138,7 +138,7 @@ class Game {
       method: 'put', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJkYWRhbmcxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWRhbmcxMjMiLCJpYXQiOjE2MzcxMjI4NDB9.2vk1a_kMlmuklPDigMDmMTlOqGpMDKuJoSuc-Y5hJCQ'
+        'Authorization': window.localStorage.getItem('accessToken')
       },
       body: JSON.stringify({
         gameId:'1',

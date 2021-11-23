@@ -28,7 +28,7 @@ function Profile () {
                     <br/>
                     <br/>
                     <div className="text-center">
-                        <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg" alt={user.name} width="150" height="150"/>
+                        <img className="img" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg" alt={user.name} width="150" height="150"/>
                     </div>
                     <br/>
                     <h3 className="text-center">@{user.username}</h3>

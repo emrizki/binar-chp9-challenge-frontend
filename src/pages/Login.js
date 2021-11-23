@@ -18,8 +18,13 @@ function Login () {
             await axios.post(`${apiUrl}/login`, {
                 username: username,
                 password: password
+            }).then(res => {
+                localStorage.setItem('id', res.data.data.id)
+                localStorage.setItem('username', res.data.data.username)
+                localStorage.setItem('accessToken', res.data.data.accessToken)
             })
             history.push('/')
+            
         } catch(error) {
             if(error.response){
                 setMessage(error.response.data.message)

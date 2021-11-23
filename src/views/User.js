@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
 import axios from 'axios';
 import '../User.css';
 import EditModal from '../components/EditModal';
@@ -183,72 +184,75 @@ const User = () => {
   }, []);
 
   return (
-    <div className="container d-flex flex-column">
-      <h1 style={{ textAlign: 'center', marginTop: '2rem' }}>List Users</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col">Bio</th>
-            <th scope="col">Location</th>
-            <th scope="col">Social Media URL</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((item) => {
-            return (
-              <tr key={item.id}>
-                <th scope="row">{item.id}</th>
-                <td>{item.first_name}</td>
-                <td>{item.last_name}</td>
-                <td>{item.email}</td>
-                <td>{item.username}</td>
-                <td>{item.bio}</td>
-                <td>{item.location}</td>
-                <td>{item.social_media_url}</td>
-                <td>
-                  <Button
-                    text="edit"
-                    action={() =>
-                      openModal(
-                        item.id,
-                        item.first_name,
-                        item.last_name,
-                        item.email,
-                        item.username,
-                        item.password,
-                        item.bio,
-                        item.location,
-                        item.social_media_url
-                      )
-                    }
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <EditModal
-        edit={isEdit}
-        close={closeModal}
-        changeFirstName={setFirstName}
-        changeLastName={setLastName}
-        changeEmail={setEmail}
-        changeUsername={setUsername}
-        changePassword={setPassword}
-        changeBio={setBio}
-        changeLocation={setLocation}
-        changeSocialMedia={setSocialMedia}
-        data={editData}
-        update={update}
-      />
-    </div>
+    <React.Fragment>
+      <Navbar />
+      <div className="container d-flex flex-column">
+        <h1 style={{ textAlign: 'center', marginTop: '2rem' }}>List Users</h1>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Username</th>
+              <th scope="col">Bio</th>
+              <th scope="col">Location</th>
+              <th scope="col">Social Media URL</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <th scope="row">{item.id}</th>
+                  <td>{item.first_name}</td>
+                  <td>{item.last_name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.username}</td>
+                  <td>{item.bio}</td>
+                  <td>{item.location}</td>
+                  <td>{item.social_media_url}</td>
+                  <td>
+                    <Button
+                      text="edit"
+                      action={() =>
+                        openModal(
+                          item.id,
+                          item.first_name,
+                          item.last_name,
+                          item.email,
+                          item.username,
+                          item.password,
+                          item.bio,
+                          item.location,
+                          item.social_media_url
+                        )
+                      }
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <EditModal
+          edit={isEdit}
+          close={closeModal}
+          changeFirstName={setFirstName}
+          changeLastName={setLastName}
+          changeEmail={setEmail}
+          changeUsername={setUsername}
+          changePassword={setPassword}
+          changeBio={setBio}
+          changeLocation={setLocation}
+          changeSocialMedia={setSocialMedia}
+          data={editData}
+          update={update}
+        />
+      </div>
+    </React.Fragment>
   );
 };
 

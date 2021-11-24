@@ -17,7 +17,7 @@ function ListGame() {
                 <div className='card-title'>Rock Paper Scissors</div>
                 <div className='card-body'>Rock Paper Scissors is a game played to settle disputes between two people. 
                 It's easy and exciting to play so let's go and try!</div>
-                <div className='btn'><button><a href='http://localhost:3000/game'>Play Game</a></button></div>
+                <div className='btn'><button><a href='/rps'>Play Game</a></button></div>
             </div>
         </div>
         <div className='card-container'>

@@ -14,7 +14,7 @@ class Game extends Component {
                 <div className="container-fluid mt-3">
                     <div className="row align-items-center">
                     <div className="col-1 fs-1 fw-bolder text-end custom-back-button">
-                        <a href='http://localhost:3000/list-game'>&lt;</a>
+                        <a href='/listgames'>&lt;</a>
                     </div>
                     <div className="col-1 text-center">
                         <img src={Logo} className="custom-logo" />

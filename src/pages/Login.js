@@ -47,7 +47,7 @@ const Login = () => {
     };
 
     if (isAuthenticated) {
-        return <Redirect to="/game" />;
+        return <Redirect to="/home" />;
     }
 
     return (

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Game from './pages/Game';
 import Profile from './pages/Profile';
-import Auth from './pages/Auth';
+import Login from './pages/Login';
 import Register from './pages/Register';
 import LandingPage from './pages/LandingPage';
 import DetailGame from './pages/DetailGame';
@@ -25,7 +25,7 @@ class App extends Component {
             <Route
               exact
               path="/login"
-              component={isAuth && isAuth !== undefined ? Game : Auth}
+              component={isAuth && isAuth !== undefined ? Game : Login}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/game/:id" component={DetailGame} />

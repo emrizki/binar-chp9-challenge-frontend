@@ -10,6 +10,8 @@ const baseUrl = `http://localhost:4000/api`;
 const User = () => {
   const [users, setUsers] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState('');
   const [editData, setEditData] = useState({
     first_name: '',
     last_name: '',
@@ -47,7 +49,6 @@ const User = () => {
       };
       const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyaXpraUBtYWlsLmNvbSIsInVzZXJuYW1lIjoibXJpemtpIiwiaWF0IjoxNjM3NjE3OTgwfQ.9Rrz9oxg2vTIXA-a1vK86q3IUKG8JntR7r3bC40avj0`;
 
-      console.log(newData, 'ini new data');
       const res = await axios.put(`${baseUrl}/user/${id}`, newData, {
         headers: {
           authorization: token,
@@ -59,13 +60,6 @@ const User = () => {
           return user.id === id ? { ...res.data.data } : user;
         })
       );
-
-      // console.log(res.data.data, 'hasil res');
-      // setUsers([...users, res.data.data]);
-
-      // const newUsers = users;
-      // newUsers.splice(id - 1, 1, newData);
-      // setUsers(res.data.data);
       setIsEdit(false);
       setEditData({
         id: '',
@@ -79,9 +73,35 @@ const User = () => {
         social_media_url: '',
       });
     } catch (err) {
+      setIsError(true);
+      setError(err.response.data);
+      setEditData({
+        id: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        username: '',
+        password: '',
+        bio: '',
+        location: '',
+        social_media_url: '',
+      });
+      // setFirstName('');
+      // setLastName('');
+      // setEmail('');
+      // setUsername('');
+      // setPassword('');
+      // setBio('');
+      // setLocation('');
+      // setSocialMedia('');
+      setTimeout(() => {
+        setIsError(false);
+        setError('');
+      }, 3000);
+
       console.log(err);
+      // console.log(err.response.data.message);
     }
-    // console.log('tes');
   };
 
   const setFirstName = (e) => {
@@ -250,6 +270,8 @@ const User = () => {
           changeSocialMedia={setSocialMedia}
           data={editData}
           update={update}
+          isError={isError}
+          error={error}
         />
       </div>
     </React.Fragment>

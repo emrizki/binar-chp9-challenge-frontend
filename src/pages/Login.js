@@ -8,19 +8,15 @@ import '../styles/Register.css';
 
 const baseUrl = `http://localhost:4000/api`;
 
-const Auth = () => {
+const Login = () => {
   const { isAuthenticated, loginSuccess, loginFailed } =
     useContext(AuthContext);
-  const [login, setLogin] = useState(true);
   const [error, setError] = useState('');
   const [isError, setIsError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const isLogin = () => setLogin(!login);
+  const [user, setUser] = useState({});
   const userLogin = async () => {
     const user = {
       username,
@@ -29,7 +25,8 @@ const Auth = () => {
 
     try {
       const res = await axios.post(`${baseUrl}/login`, user);
-      localStorage.setItem('token', res.data.data.accessToken);
+      localStorage.setItem('accessToken', res.data.data.accessToken);
+      setUser(res.data.data);
       setUsername('');
       setPassword('');
       setIsLoading(false);
@@ -54,7 +51,7 @@ const Auth = () => {
 
   return (
     <Fragment>
-      <NavigationBar />
+      <NavigationBar user={user} />
       <div className="login-bg">
         <div className="container-sm">
           <br />
@@ -118,28 +115,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
-
-// export default class Login extends Component {
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     const data = {
-//       username: this.username,
-//       password: this.password,
-//     };
-
-//     axios
-//       .post('http://localhost:3000/api/login', data)
-//       .then((res) => {
-//         console.log(res);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-
-//   render() {
-//
-//   }
-// }
+export default Login;

@@ -23,7 +23,7 @@ class App extends Component {
         <AuthProvider>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <PrivateRoute exact path="/game" component={Game} />
+            <Route exact path="/rps" component={Game} />
             <Route exact path="/profile/:username" component={Profile} />
             <Route
               exact

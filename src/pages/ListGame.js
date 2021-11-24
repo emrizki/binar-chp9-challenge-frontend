@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect ,Component } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Pic1 from '../images/RockPaperScissor.jpg'
@@ -9,37 +9,47 @@ import Pic4 from '../images/Streetfighter.jpeg'
 import '../pages/ListGame.css'
 import NavigationBar from '../components/Navbar'
 
-function ListGame() {
-    const apiUrl = process.env.REACT_APP_API_BASE_URL;
-    const url = `${apiUrl}/game`
-    const [game, setGame] = useState(null)
 
 
+class ListGame extends Component {
 
-    useEffect(() => {
+    state = {
+        game: []
+    }
+
+    componentDidMount() {
+        const apiUrl = process.env.REACT_APP_API_BASE_URL;
+        const url = `${apiUrl}/game`
         axios.get(url)
             .then(response => {
-                setGame(response.data.data)
-                console.log(response.data)
+                this.setState({ game: response.data.data })
+                console.log(response.data.data)
             })
-    }, [url])
-    return (
-        <Fragment>
+    }
+
+    renderGameData() {
+
+        return this.state.game.map((e, index) => {
+            return (
+                <div className='card-container'>
+                    <div className='image-container'><img src={Pic1} alt='' /></div>
+                    <div className='card-content'>
+                        <div className='card-title'>{e.name}</div>
+                        <div className='card-body'>{e.description}</div>
+                        <div className='btn'><button><a href='/rps'>Play Game</a></button></div>
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    render() {
+        return (
+            <Fragment>
             <NavigationBar />
             <div className='cards-element mt-5'>
                 {
-                    game.map((e, index) => {
-                        return (
-                            <div className='card-container'>
-                                <div className='image-container'><img src={Pic1} alt='' /></div>
-                                <div className='card-content'>
-                                    <div className='card-title'>{e.name}</div>
-                                    <div className='card-body'>{e.description}</div>
-                                    <div className='btn'><button><a href='/rps'>Play Game</a></button></div>
-                                </div>
-                            </div>
-                        )
-                    })
+                    this.renderGameData()
                 }
                 {/* <div className='card-container'>
                     <div className='image-container'><img src={Pic1} alt='' /></div>
@@ -79,7 +89,8 @@ function ListGame() {
                 </div> */}
             </div>
         </Fragment>
-    )
+        );
+    }
 }
 
 export default ListGame

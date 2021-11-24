@@ -1,66 +1,121 @@
-import React, { Component, Fragment, useState } from 'react'
-import axios from 'axios'
-import { useHistory } from 'react-router-dom'
-import NavigationBar from '../components/Navbar'
-import '../styles/Login.css'
+import React, { Fragment, useState, useContext } from 'react';
+import { AuthContext } from '../context/auth';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import NavigationBar from '../components/Navbar';
+import '../styles/Login.css';
+import '../styles/Register.css';
 
-function Login () {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-    const [message, setMessage] = useState('')
-    const history = useHistory()
 
-    const submit = async (e) => {
-        e.preventDefault();
+const Login = () => {
+    const { isAuthenticated, loginSuccess, loginFailed } =
+        useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [isError, setIsError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [user, setUser] = useState({});
+    const userLogin = async () => {
+        const user = {
+            username,
+            password,
+        };
+
         try {
-            const apiUrl = process.env.REACT_APP_API_BASE_URL;
-            await axios.post(`${apiUrl}/login`, {
-                username: username,
-                password: password
-            }).then(res => {
-                localStorage.setItem('id', res.data.data.id)
-                localStorage.setItem('username', res.data.data.username)
-                localStorage.setItem('accessToken', res.data.data.accessToken)
-            })
-            history.push('/')
-            
-        } catch(error) {
-            if(error.response){
-                setMessage(error.response.data.message)
-            }
+            const res = await axios.post(`${baseUrl}/login`, user);
+            localStorage.setItem('accessToken', res.data.data.accessToken);
+            localStorage.setItem('username', res.data.data.username);
+            setUser(res.data.data);
+            setUsername('');
+            setPassword('');
+            setIsLoading(false);
+            loginSuccess();
+        } catch (err) {
+            setIsError(true);
+            setError(err.response.data);
+            setIsLoading(false);
+            setUsername('');
+            setPassword('');
+            setTimeout(() => {
+                setIsError(false);
+                setError('');
+                loginFailed();
+            }, 2000);
         }
+    };
+
+    if (isAuthenticated) {
+        return <Redirect to="/home" />;
     }
 
     return (
         <Fragment>
-            <NavigationBar/>
+            <NavigationBar user={user} />
             <div className="login-bg">
                 <div className="container-sm">
-                    <br/>
+                    <br />
                     <h2 className="row justify-content-center">LOGIN</h2>
                     <div className="row justify-content-center">
                         <div className="col-md-5">
-                            <form onSubmit={submit}>
-                                <label className="col-form-label">Username</label>
-                                <input type="text" className="form-control" required
-                                    value={username} onChange={(e) => setUsername (e.target.value)}/>
-                                <br/>
-                                <label className="col-form-label">Password</label>
-                                <input type="password" className="form-control" required
-                                    value={password} onChange={(e) => setPassword (e.target.value)}/>
-                                <br/>
-                                <button className="btn login-btn">Login</button>
-                                <br/>
-                                <br/>
-                                <h5 className="text-center">{message}</h5>
-                            </form>
+                            <label className="col-form-label">Username</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                name="username"
+                                required
+                            />
+                            <br />
+                            <label className="col-form-label">Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
+                                required
+                            />
+                            <br />
+                            <div>
+                                <div>
+                                    {isError && (
+                                        <div>
+                                            {error && (
+                                                <p
+                                                    style={{
+                                                        color: 'orange',
+                                                        textShadow: '2px',
+                                                        fontSize: '1.2rem',
+                                                        margin: '0.4rem 0',
+                                                        textAlign: 'center',
+                                                    }}
+                                                >
+                                                    {error.message}
+                                                </p>
+                                            )}
+                                            {error.status === 400 && (
+                                                <p style={{ color: 'read', margi: '0.4rem 0' }}>
+                                                    {error.data.error}
+                                                </p>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                                <p>Click <a className="not-registered" href="/register">here</a> if you haven't registered</p>
+                                <button className="btn login-btn" onClick={userLogin}>
+                                    Login
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </Fragment>
-    )
-}
+    );
+};
 
 export default Login;

@@ -1,9 +1,8 @@
 body{
   font-family: 'Open Sans', sans-serif;
-  background-color: #9C835F;
 }
 
-.custom-back-button{
+.custom-back-button a{
   color: #724C21;
 }
 

@@ -11,6 +11,8 @@ import LandingPage from './pages/LandingPage';
 import DetailGame from './pages/DetailGame';
 import PrivateRoute from './routes/PrivateRoutes';
 import { AuthProvider } from './context/auth';
+import ListGame from './pages/ListGame';
+import Home from './pages/Home';
 
 const isAuth = localStorage.getItem('token');
 
@@ -21,7 +23,7 @@ class App extends Component {
         <AuthProvider>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <PrivateRoute exact path="/game" component={Game} />
+            <Route exact path="/rps" component={Game} />
             <Route exact path="/profile/:username" component={Profile} />
             <Route
               exact
@@ -31,6 +33,8 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/game/:id" component={DetailGame} />
             <Route exact path="/users" component={User} />
+            <Route exact path="/listgames" component={ListGame} />
+            <Route exact path="/home" component={Home} />
           </Switch>
         </AuthProvider>
       </Router>

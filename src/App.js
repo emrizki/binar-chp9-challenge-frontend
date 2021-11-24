@@ -14,6 +14,7 @@ import { AuthProvider } from './context/auth';
 import ListGame from './pages/ListGame';
 import Home from './pages/Home';
 
+
 const isAuth = localStorage.getItem('token');
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/home" component={Home} />
           </Switch>
         </AuthProvider>
+
       </Router>
     );
   }

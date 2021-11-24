@@ -27,6 +27,7 @@ const Login = () => {
         try {
             const res = await axios.post(`${baseUrl}/login`, user);
             localStorage.setItem('accessToken', res.data.data.accessToken);
+            localStorage.setItem('username', res.data.data.username);
             setUser(res.data.data);
             setUsername('');
             setPassword('');
@@ -104,6 +105,7 @@ const Login = () => {
                                         </div>
                                     )}
                                 </div>
+                                <p>Click <a className="not-registered" href="/register">here</a> if you haven't registered</p>
                                 <button className="btn login-btn" onClick={userLogin}>
                                     Login
                                 </button>

@@ -3,15 +3,16 @@ import '../pages/Home.css'
 import NavigationBar from '../components/Navbar'
 
 function Home() {
+    
     return (
         <Fragment>
             <NavigationBar />
         <div>
             <div className='content'>
                 <div className='intro'>
-                    <h1>Hello, Nama</h1>
-                    <p>Lorem ipsum dolor sit amte, consectetur adipiscing elit.</p>
-                    <p>Lorem ipsum dolor sit amte, consectetur adipiscing elit.</p>
+                    <h1>Hello, {localStorage.getItem('username')}</h1>
+                    <p>Selamat datang di Binar Games.</p>
+                    <p>Pilih game sekarang untuk menikmati pengalaman yang tak terlupakan.</p>
                     <a href='/listgames' className='btn-play-game'>Play Game</a>
                 </div>
             </div>

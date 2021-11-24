@@ -17,3 +17,12 @@
     background-color: black;
     color: white;
 }
+
+.not-registered {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.not-registered:hover {
+    color: darkgray;
+}
